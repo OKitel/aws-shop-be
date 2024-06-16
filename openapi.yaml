@@ -32,7 +32,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Product'
-  
+
   /products/{productID}:
     get:
       tags:
@@ -53,14 +53,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Product'          
+                $ref: '#/components/schemas/Product'
         '404':
           description: Product not found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFound'
-      
+
 components:
   schemas:
     Product:
@@ -68,14 +68,16 @@ components:
       properties:
         id:
           type: string
-          example: "1"
-        name: 
+          example: '1'
+        title:
           type: string
-          example: "Product 1"
+          example: 'Terraforming Mars'
         price:
           type: number
           example: 1
+        img:
+          type: string
+          example: 'https://d266s2h0r1qt2p.cloudfront.net/assets/img/terraforming-mars.jpg'
     NotFound:
       type: string
       example: "'message': 'Product not found'"
-        
