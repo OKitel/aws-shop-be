@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
-import os
-
 import aws_cdk as cdk
 
-from product_service.product_service_stack import ProductServiceStack
+from product_service.lambda_deployment import MyCdkAppStack
 
 
 app = cdk.App()
-ProductServiceStack(app, "ProductServiceStack",
+MyCdkAppStack(app, "ProductServiceStack",
     # If you don't specify 'env', this stack will be environment-agnostic.
     # Account/Region-dependent features and context lookups will not work,
     # but a single synthesized template can be deployed anywhere.
