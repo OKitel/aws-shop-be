@@ -12,12 +12,12 @@ def test_handler_returns_products_list():
     response = product_list.handler(None, None)
     assert response['statusCode'] == 200
     body = json.loads(response['body'])
-    assert body[0]['name'] == 'Product 1'
-    assert body[0]['price'] == 1
-    assert body[1]['name'] == 'Product 2'
-    assert body[1]['price'] == 2
-    assert body[2]['name'] == 'Product 3'
-    assert body[2]['price'] == 3
+    assert body[0]['name'] == 'Terraforming Mars'
+    assert body[0]['price'] == 35
+    assert body[1]['name'] == 'Wingspan'
+    assert body[1]['price'] == 40
+    assert body[2]['name'] == 'Everdell'
+    assert body[2]['price'] == 45
 
 if __name__ == '__main__':
     pytest.main()
