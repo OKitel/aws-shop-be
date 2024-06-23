@@ -43,7 +43,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Product'
+              $ref: '#/components/schemas/NewProduct'
         required: true
       responses:
         '200':
@@ -96,6 +96,27 @@ components:
         title:
           type: string
           example: 'Terraforming Mars'
+        description:
+          type: string
+          example: 'Terraforming Mars description'
+        price:
+          type: number
+          example: 1
+        img:
+          type: string
+          example: 'https://d266s2h0r1qt2p.cloudfront.net/assets/img/terraforming-mars.jpg'
+        count:
+          type: number
+          example: 1
+    NewProduct:
+      type: object
+      properties:
+        title:
+          type: string
+          example: 'Terraforming Mars'
+        description:
+          type: string
+          example: 'Terraforming Mars description'
         price:
           type: number
           example: 1
