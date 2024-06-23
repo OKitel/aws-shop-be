@@ -32,6 +32,30 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Product'
+    post:
+      tags:
+        - product
+      summary: Create new product
+      description: Add new product to list of products
+      operationId: CreateProductHandler
+      requestBody:
+        description: Create new product
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '400':
+          description: invalid input
 
   /products/{productID}:
     get:
@@ -78,6 +102,9 @@ components:
         img:
           type: string
           example: 'https://d266s2h0r1qt2p.cloudfront.net/assets/img/terraforming-mars.jpg'
+        count:
+          type: number
+          example: 1
     NotFound:
       type: string
       example: "'message': 'Product not found'"

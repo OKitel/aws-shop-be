@@ -20,3 +20,27 @@ class ApiGateway(Stack):
     product_by_id_resource = products_resource.add_resource("{productId}")
     product_by_id_resource.add_method("GET", apigateway.LambdaIntegration(get_product_by_id_fn))
 
+
+    products_resource.add_method(
+        'OPTIONS',
+        apigateway.MockIntegration(
+            integration_responses=[{
+                'statusCode': '200',
+                'responseParameters': {
+                    'method.response.header.Access-Control-Allow-Headers': "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                    'method.response.header.Access-Control-Allow-Origin': "'*'",
+                    'method.response.header.Access-Control-Allow-Methods': "'OPTIONS,GET,PUT,POST,DELETE'"
+                }
+            }],
+            passthrough_behavior=apigateway.PassthroughBehavior.NEVER,
+            request_templates={"application/json": "{\"statusCode\": 200}"}
+        ),
+        method_responses=[{
+            'statusCode': '200',
+            'responseParameters': {
+                'method.response.header.Access-Control-Allow-Headers': True,
+                'method.response.header.Access-Control-Allow-Origin': True,
+                'method.response.header.Access-Control-Allow-Methods': True
+            }
+        }]
+    )
