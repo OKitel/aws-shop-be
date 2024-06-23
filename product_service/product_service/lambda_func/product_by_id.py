@@ -11,7 +11,7 @@ def handler(event, context):
   try:
     product_id = event["pathParameters"]["productId"]
     
-    print("product ID: %s", product_id)
+    print("product ID: ", product_id)
     
     dynamodb = boto3.resource('dynamodb', region_name=os.getenv('AWS_REGION'))
 

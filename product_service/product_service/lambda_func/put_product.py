@@ -4,7 +4,7 @@ import boto3
 import uuid
 
 def handler(event, context):
-    print("CREATE product request. Body: %s", event.get('body'))
+    print("CREATE product request. Body: ", event.get('body'))
 
     try:
       product_data = json.loads(event['body'])
