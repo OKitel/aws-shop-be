@@ -5,9 +5,14 @@ import boto3
 BASE_URL = "https://d266s2h0r1qt2p.cloudfront.net/assets/img/"
 
 def handler(event, context):
-  
+    
+  print("GET product by ID request")
+
   try:
     product_id = event["pathParameters"]["productId"]
+    
+    print("product ID: %s", product_id)
+    
     dynamodb = boto3.resource('dynamodb', region_name=os.getenv('AWS_REGION'))
 
     products_table_name = os.getenv('PRODUCTS_TABLE_NAME')

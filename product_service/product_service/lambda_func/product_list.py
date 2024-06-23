@@ -5,6 +5,8 @@ import boto3
 BASE_URL = "https://d266s2h0r1qt2p.cloudfront.net/assets/img/"
 
 def handler(event, context):
+
+  print("GET products request")
   
   try:
     dynamodb = boto3.resource('dynamodb', region_name=os.getenv('AWS_REGION'))
