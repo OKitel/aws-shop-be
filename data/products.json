@@ -1,0 +1,51 @@
+[
+  {
+    "title": "Terraforming Mars",
+    "description": "In Terraforming Mars, players take the role of corporations working together to terraform the planet Mars by raising the temperature, adding oxygen to the atmosphere, covering the planet''s surface with water and creating plant and animal life.",
+    "price": 35,
+    "img": "terraforming-mars.jpg",
+    "count": 15
+  },
+  {
+    "title": "Wingspan",
+    "description": "Wingspan is a competitive, medium-weight, card-driven, engine-building board game from Stonemaier Games. The winner is the player with the most points accumulated from birds, bonus cards, end-of-round goals, eggs, cached food, and tucked birds.",
+    "price": 40,
+    "img": "wingspan.jpg",
+    "count": 10
+  },
+  {
+    "title": "Everdell",
+    "description": "Everdell is a worker placement game for 2-4 players, set in a lush, woodland valley. Elements of hand- and resource-management play their part, too. Over the course of four seasons, you will compete to create a tableau of gorgeous cards. Which Constructions will you place in your greenwood city?",
+    "price": 45,
+    "img": "everdell.jpg",
+    "count": 10
+  },
+  {
+    "title": "Ticket to Ride",
+    "description": "Ticket to Ride is a cross-country train adventure in which players collect and play matching train cards to claim railway routes connecting cities throughout North America.",
+    "price": 47,
+    "img": "ticket-to-ride.jpg",
+    "count": 15
+  },
+  {
+    "title": "Carcassonne",
+    "description": "Carcassonne is a tile-laying game where players collectively construct the area around the medieval French city of Carcassonne while competing to place followers on various features and score the most points.",
+    "price": 25,
+    "img": "carcassonne.jpg",
+    "count": 20
+  },
+  {
+    "title": "7 Wonders Duel",
+    "description": "In 7 Wonders Duel, each player is leading a civilization and will, over the course of 3 ages, construct Buildings and Wonders. Each card represents a Building which helps the player to strengthen their army, make scientific discoveries or develop their city.",
+    "price": 20,
+    "img": "7-wonders-duel.jpg",
+    "count": 10
+  },
+  {
+    "title": "Dune: Imperium",
+    "description": "Dune: Imperium is a 2020 board game designed by Paul Dennen and published by Dire Wolf Digital. In the board game, which is set in Frank Herbert''s Dune universe, players use deck-building and worker placement to gain alliances with factions and combat to earn victory points.",
+    "price": 40,
+    "img": "dune-imperium.jpg",
+    "count": 5
+  }
+]
