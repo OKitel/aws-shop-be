@@ -1,6 +1,7 @@
 import json
 import os
 import boto3
+import uuid
 
 def handler(event, context):
     try:
@@ -14,10 +15,20 @@ def handler(event, context):
       products_table = dynamodb.Table(products_table_name)
       stocks_table = dynamodb.Table(stocks_table_name)
 
-      products_table.put_item(Item=product_data)
+      product_id = str(uuid.uuid4())
+
+      product = {
+        'id': product_id,
+        'title': product_data['title'],
+        'price': product_data['price'],
+        'description': product_data['description'],
+        'img': product_data.get('img')
+      }
+
+      products_table.put_item(Item=product)
       stocks_table.put_item(Item={
-        'product_id': product_data['id'],
-        'count': 0
+        'product_id': product_id,
+        'count': product_data['count']
       })
 
       return {
@@ -29,7 +40,7 @@ def handler(event, context):
           },
           'body': json.dumps({
               'message': 'Product created successfully',
-              'productId': product_data['id']
+              'productId': product_id
           })
       }
     
