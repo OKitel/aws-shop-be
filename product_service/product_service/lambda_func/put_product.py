@@ -9,6 +9,17 @@ def handler(event, context):
     try:
       product_data = json.loads(event['body'])
 
+      if not isinstance(product_data.get('title'), str):
+        raise ValueError("Invalid type for 'title'. Expected string.")
+      if not isinstance(product_data.get('price'), (int, float)):
+        raise ValueError("Invalid type for 'price'. Expected number.")
+      if not isinstance(product_data.get('description'), str):
+        raise ValueError("Invalid type for 'description'. Expected string.")
+      if 'img' in product_data and not isinstance(product_data.get('img'), str):
+        raise ValueError("Invalid type for 'img'. Expected string.")
+      if not isinstance(product_data.get('count'), int):
+        raise ValueError("Invalid type for 'count'. Expected integer.")
+
       dynamodb = boto3.client('dynamodb', region_name=os.getenv('AWS_REGION'))
 
       products_table_name = os.getenv('PRODUCTS_TABLE_NAME')
@@ -56,6 +67,17 @@ def handler(event, context):
           })
       }
     
+    except ValueError as e:
+      return {
+          'statusCode': 400,
+          "headers": {
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+              "content-type": "application/json"
+          },
+          'body': json.dumps({'error': f'Invalid input: {str(e)}'})
+      }
+
     except KeyError as e:
       return {
           'statusCode': 400,
