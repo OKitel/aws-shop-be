@@ -35,7 +35,7 @@ def handler(event, context):
             'title': {'S': product_data['title']},
             'price': {'N': str(product_data['price'])},
             'description': {'S': product_data['description']},
-            'img': {'S': product_data.get('img')}
+            'img': {'S': product_data.get('img', '')}
           }
         }
       }
