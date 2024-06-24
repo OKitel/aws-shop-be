@@ -9,15 +9,15 @@ def handler(event, context):
     try:
       product_data = json.loads(event['body'])
 
-      if not isinstance(product_data.get('title'), str):
+      if not isinstance(product_data['title'], str):
         raise ValueError("Invalid type for 'title'. Expected string.")
-      if not isinstance(product_data.get('price'), (int, float)):
+      if not isinstance(product_data['price'], (int, float)):
         raise ValueError("Invalid type for 'price'. Expected number.")
-      if not isinstance(product_data.get('description'), str):
+      if not isinstance(product_data['description'], str):
         raise ValueError("Invalid type for 'description'. Expected string.")
       if 'img' in product_data and not isinstance(product_data.get('img'), str):
         raise ValueError("Invalid type for 'img'. Expected string.")
-      if not isinstance(product_data.get('count'), int):
+      if not isinstance(product_data['count'], int):
         raise ValueError("Invalid type for 'count'. Expected integer.")
 
       dynamodb = boto3.client('dynamodb', region_name=os.getenv('AWS_REGION'))
