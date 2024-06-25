@@ -29,9 +29,9 @@ def handler(event, context):
         'id': product_item['Item']['id'],
         'title': product_item['Item']['title'],
         'description': product_item['Item']['description'],
-        'price': str(product_item['Item']['price']),
+        'price': float(product_item['Item']['price']),
         'img': BASE_URL + product_item['Item']['img'],
-        'count': str(stock_item['Item']['count']),
+        'count': int(stock_item['Item']['count']),
       }
 
       return {
