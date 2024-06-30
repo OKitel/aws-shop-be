@@ -1,19 +1,15 @@
-from aws_cdk import (
-    # Duration,
-    Stack,
-    # aws_sqs as sqs,
-)
+from aws_cdk import Stack
+from import_service.api_gateway import ApiGateway
+from import_service.import_products_lambda import ImportServiceLambda
 from constructs import Construct
 
 class ImportServiceStack(Stack):
 
-    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
-        super().__init__(scope, construct_id, **kwargs)
+    def __init__(self, scope: Construct, id: str, **kwargs) -> None:
+        super().__init__(scope, id, **kwargs)
 
-        # The code that defines your stack goes here
+        bucket_name = 'rsschool-import-bucket '
 
-        # example resource
-        # queue = sqs.Queue(
-        #     self, "ImportServiceQueue",
-        #     visibility_timeout=Duration.seconds(300),
-        # )
+        import_products_lambda = ImportServiceLambda(self, 'ImportLambda', bucket_name)
+        ApiGateway(self, 'APIGateway', import_products_fn=import_products_lambda.import_products_file)
+    

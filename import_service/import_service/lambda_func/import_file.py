@@ -1,0 +1,25 @@
+import os
+import boto3
+
+s3 = boto3.client('s3')
+
+def handler(event, context):
+  file_name = event['queryStringParameters']['name']
+  bucket_name = os.environ['BUCKET_NAME']
+  key = f"uploaded/{file_name}"
+
+  params = {
+    'Bucket': bucket_name,
+    'Key': key,
+  }
+
+  signed_url = s3.generate_presigned_url('put_object', Params=params)
+
+  return {
+    'statusCode': 200,
+    'headers': {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+    },
+    'body': signed_url
+  }
