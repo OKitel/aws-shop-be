@@ -23,8 +23,6 @@ def s3(aws_credentials):
 def test_parse_file_lambda(s3):
     bucket_name = 'test-aws-import-bucket'
     
-
-    # Create a mock S3 client and bucket
     s3.create_bucket(Bucket=bucket_name, CreateBucketConfiguration={
         'LocationConstraint': 'eu-central-1'
     })
@@ -49,7 +47,6 @@ def test_parse_file_lambda(s3):
         ]
     }
 
-    # Call the handler function
     response = parse_file.handler(event, None)
 
     # Check if the file was read and processed
