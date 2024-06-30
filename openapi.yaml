@@ -53,7 +53,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Product'
+                  $ref: '#/components/schemas/ProductCreatedResponse'
         '400':
           description: invalid input
 
@@ -129,3 +129,12 @@ components:
     NotFound:
       type: string
       example: "'message': 'Product not found'"
+    ProductCreatedResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: 'Product created successfully'
+        productId:
+          type: string
+          example: '48477a09-cdab-417f-8370-eac4c1aec783'

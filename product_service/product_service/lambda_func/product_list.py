@@ -28,8 +28,8 @@ def handler(event, context):
     for stock_item in stocks_items:
       product_id = stock_item['product_id']
       if product_id in product_dict:
-        product_dict[product_id]['count'] = str(stock_item['count'])
-        product_dict[product_id]['price'] = str(product_dict[product_id]['price'])
+        product_dict[product_id]['count'] = int(stock_item['count'])
+        product_dict[product_id]['price'] = float(product_dict[product_id]['price'])
         product_dict[product_id]['title'] = str(product_dict[product_id]['title'])
         product_dict[product_id]['description'] = str(product_dict[product_id]['description'])
         product_dict[product_id]['img'] = BASE_URL + str(product_dict[product_id]['img'])

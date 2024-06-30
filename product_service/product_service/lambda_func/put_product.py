@@ -13,12 +13,16 @@ def handler(event, context):
         raise ValueError("Invalid type for 'title'. Expected string.")
       if not isinstance(product_data['price'], (int, float)):
         raise ValueError("Invalid type for 'price'. Expected number.")
+      if product_data['price'] < 0:
+        raise ValueError("'price' cannot be less than 0.")
       if not isinstance(product_data['description'], str):
         raise ValueError("Invalid type for 'description'. Expected string.")
       if 'img' in product_data and not isinstance(product_data.get('img'), str):
         raise ValueError("Invalid type for 'img'. Expected string.")
       if not isinstance(product_data['count'], int):
         raise ValueError("Invalid type for 'count'. Expected integer.")
+      if product_data['count'] < 0:
+        raise ValueError("'count' cannot be less than 0.")
 
       dynamodb = boto3.client('dynamodb', region_name=os.getenv('AWS_REGION'))
 
