@@ -1,0 +1,41 @@
+openapi: 3.0.3
+info:
+  title: AWS SHOP - OpenAPI 3.0
+  description: |-
+    This is a sample AWS Shop Server based on the OpenAPI 3.0 specification.
+    Some useful links:
+    - [The AWS Shop Front-end repository](https://github.com/OKitel/nodejs-aws-shop-react)
+    - [The AWS Shop Back-end repository](https://github.com/OKitel/aws-shop-be)
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://p5o62tfcp1.execute-api.eu-central-1.amazonaws.com/prod
+tags:
+  - name: import
+    description: Import products via csv file
+paths:
+  /import:
+    get:
+      tags:
+        - import csv file
+      summary: import csv file
+      description: returns signed URL for file upload
+      operationId: importProductsFile
+      parameters:
+        - name: name
+          in: query
+          description: filename
+          example: 'boardgames.csv'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: 'https://rsschool-import-bucket.s3.amazonaws.com/uploaded/boardgames.csv?...'
