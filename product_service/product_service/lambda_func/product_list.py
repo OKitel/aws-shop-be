@@ -1,24 +1,63 @@
 import json
+import os
+import boto3
 
 BASE_URL = "https://d266s2h0r1qt2p.cloudfront.net/assets/img/"
 
 def handler(event, context):
-  products = [
-    {"id": "1", "title": "Terraforming Mars", "price": 35, "img": f"{BASE_URL}terraforming-mars.jpg"},
-    {"id": "2", "title": "Wingspan", "price": 40, "img": f"{BASE_URL}wingspan.jpg"},
-    {"id": "3", "title": "Everdell", "price": 45, "img": f"{BASE_URL}everdell.jpg"},
-    {"id": "4", "title": "Ticket to Ride", "price": 47, "img": f"{BASE_URL}ticket-to-ride.jpg"},
-    {"id": "5", "title": "Carcassonne", "price": 25, "img": f"{BASE_URL}carcassonne.jpg"},
-    {"id": "6", "title": "7 Wonders Duel", "price": 20, "img": f"{BASE_URL}7-wonders-duel.jpg"},
-    {"id": "7", "title": "Dune: Imperium", "price": 40, "img": f"{BASE_URL}dune-imperium.jpg"},
-  ]
 
-  return {
-    "statusCode": 200,
-    "headers": {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET",
-      "content-type": "application/json"
-    },
-    "body": json.dumps(products)
-  }
+  print("GET products request")
+  
+  try:
+    dynamodb = boto3.resource('dynamodb', region_name=os.getenv('AWS_REGION'))
+
+    products_table_name = os.getenv('PRODUCTS_TABLE_NAME')
+    stocks_table_name = os.getenv('STOCKS_TABLE_NAME')
+
+    products_table = dynamodb.Table(products_table_name)
+    stocks_table = dynamodb.Table(stocks_table_name)
+
+    products_response = products_table.scan()
+    products_items = products_response.get('Items', [])
+
+    stocks_response = stocks_table.scan()
+    stocks_items = stocks_response.get('Items', [])
+
+    product_dict = {item['id']: item for item in products_items}
+
+    for stock_item in stocks_items:
+      product_id = stock_item['product_id']
+      if product_id in product_dict:
+        product_dict[product_id]['count'] = int(stock_item['count'])
+        product_dict[product_id]['price'] = float(product_dict[product_id]['price'])
+        product_dict[product_id]['title'] = str(product_dict[product_id]['title'])
+        product_dict[product_id]['description'] = str(product_dict[product_id]['description'])
+        product_dict[product_id]['img'] = BASE_URL + str(product_dict[product_id]['img'])
+      else:
+        product_dict[product_id] = {
+          'id': product_id,
+          'count': str(stock_item['count'])
+        }
+
+    products = list(product_dict.values())
+    
+    return {
+      "statusCode": 200,
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "content-type": "application/json"
+      },
+      "body": json.dumps(products)
+    }
+  
+  except Exception as e:
+    return {
+      'statusCode': 500,
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "content-type": "application/json"
+      },
+      'body': json.dumps({'error': str(e)})
+    }
