@@ -32,7 +32,7 @@ def handler(event, context):
         product_dict[product_id]['price'] = float(product_dict[product_id]['price'])
         product_dict[product_id]['title'] = str(product_dict[product_id]['title'])
         product_dict[product_id]['description'] = str(product_dict[product_id]['description'])
-        product_dict[product_id]['img'] = BASE_URL + str(product_dict[product_id]['img'])
+        product_dict[product_id]['img'] = BASE_URL + str(product_dict[product_id].get('img', 'default-boardgames.png'))
       else:
         product_dict[product_id] = {
           'id': product_id,
