@@ -18,7 +18,19 @@ class CatalogBatchProcess(Stack):
       self, 'CreateProductTopic', topic_name='createProductTopic'
     )
 
-    create_product_topic.add_subscription(subscriptions.EmailSubscription('kitelolga@int.pl'))
+    create_product_topic.add_subscription(subscriptions.EmailSubscription(
+      'kitelolga@int.pl', 
+      filter_policy={
+        "price": sns.SubscriptionFilter.numeric_filter(less_than_or_equal_to=100)
+      }
+    ))
+
+    create_product_topic.add_subscription(subscriptions.EmailSubscription(
+      'okitel@int.pl', 
+      filter_policy={
+        "price": sns.SubscriptionFilter.numeric_filter(greater_than=100)
+      }
+    ))
 
     catalog_items_queue = sqs.Queue(self, "CatalogItemsQueue", queue_name="catalogItemsQueue")
 
