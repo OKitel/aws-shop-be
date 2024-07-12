@@ -38,7 +38,7 @@ def generatePolicy(principalId, effect, resource):
     statementOne['Action'] = 'execute-api:Invoke'
     statementOne['Effect'] = effect
     statementOne['Resource'] = resource
-    policyDocument['Statement'] = {statementOne}
+    policyDocument['Statement'] = [statementOne]
     authResponse['policyDocument'] = policyDocument
 
   return authResponse
