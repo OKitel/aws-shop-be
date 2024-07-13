@@ -9,13 +9,17 @@ def handler(event, context):
   if not authorization_header:
     return {
       'statusCode': 401,
+      'headers': {
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+              "content-type": "text/plain"
+        },
       'body': 'Unauthorized'
     }
   
   encoded_credentials = authorization_header.split(' ')[1]
   decoded_credentials = base64.b64decode(encoded_credentials).decode('utf-8')
   username, password = decoded_credentials.split('=')
-  password = password.strip()
 
   stored_password = os.getenv(username)
 
@@ -24,6 +28,11 @@ def handler(event, context):
   else:
     return {
       'statusCode': 403,
+      'headers': {
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+              "content-type": "text/plain"
+        },
       'body': 'Forbidden'
     }
   
