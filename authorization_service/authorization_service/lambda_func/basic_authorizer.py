@@ -17,24 +17,21 @@ def handler(event, context):
       'body': 'Unauthorized'
     }
   
-  encoded_credentials = authorization_header.split(' ')[1]
-  decoded_credentials = base64.b64decode(encoded_credentials).decode('utf-8')
-  username, password = decoded_credentials.split('=')
+  try: 
+    encoded_credentials = authorization_header.split(' ')[1]
+    decoded_credentials = base64.b64decode(encoded_credentials).decode('utf-8')
+    username, password = decoded_credentials.split('=')
 
-  stored_password = os.getenv(username)
+    stored_password = os.getenv(username)
 
-  if stored_password and stored_password == password:
-    return generatePolicy(username, 'Allow', event['methodArn'])
-  else:
-    return {
-      'statusCode': 403,
-      'headers': {
-              "Access-Control-Allow-Origin": "*",
-              "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-              "content-type": "text/plain"
-        },
-      'body': 'Forbidden'
-    }
+    if stored_password and stored_password == password:
+      return generatePolicy(username, 'Allow', event['methodArn'])
+    else:
+      return generatePolicy(username, 'Deny', event['methodArn'])
+  
+  except Exception as e:
+    return generatePolicy('any_user', 'Deny', event['methodArn'])
+
   
 def generatePolicy(principalId, effect, resource):
   authResponse = {}
