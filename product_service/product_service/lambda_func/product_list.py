@@ -2,7 +2,7 @@ import json
 import os
 import boto3
 
-BASE_URL = "https://d266s2h0r1qt2p.cloudfront.net/assets/img/"
+BASE_URL = "https://d3ngi53tq17rj4.cloudfront.net/assets/img/"
 
 def handler(event, context):
 

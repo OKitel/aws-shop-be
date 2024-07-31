@@ -104,7 +104,7 @@ components:
           example: 1
         img:
           type: string
-          example: 'https://d266s2h0r1qt2p.cloudfront.net/assets/img/terraforming-mars.jpg'
+          example: 'https://d3ngi53tq17rj4.cloudfront.net/assets/img/terraforming-mars.jpg'
         count:
           type: number
           example: 1
@@ -122,7 +122,7 @@ components:
           example: 1
         img:
           type: string
-          example: 'https://d266s2h0r1qt2p.cloudfront.net/assets/img/terraforming-mars.jpg'
+          example: 'https://d3ngi53tq17rj4.cloudfront.net/assets/img/terraforming-mars.jpg'
         count:
           type: number
           example: 1
