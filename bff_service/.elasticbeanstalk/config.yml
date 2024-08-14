@@ -1,0 +1,19 @@
+branch-defaults:
+  default:
+    environment: OKitel-bff-api-prod
+environment-defaults:
+  OKitel-bff-api-prod:
+    branch: null
+    repository: null
+global:
+  application_name: OKitel-bff-api
+  default_ec2_keyname: aws-eb
+  default_platform: Docker running on 64bit Amazon Linux 2023
+  default_region: eu-central-1
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: eb-cli
+  sc: null
+  workspace_type: Application
